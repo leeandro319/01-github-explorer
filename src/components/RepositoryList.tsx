@@ -3,10 +3,15 @@ import { RepositoryItem } from "./RepositoryItem";
 
 import '../styles/repositories.scss'
 
+interface Repository {
+  name: string,
+  descrition: string,
+  html_url: string;
+}
 
 export function RepositoryList(){
 
-    const [repositories, setRepositories] = useState([]);
+    const [repositories, setRepositories] = useState<Repository[]>([]);
     
     useEffect(()=>{
         fetch('https://api.github.com/orgs/rocketseat/repos')
@@ -20,13 +25,11 @@ export function RepositoryList(){
 
             <ul>
               {
-                repositories.map(item=>(
-                  <RepositoryItem repository={item} key={item.name}/>
+                repositories.map(repository=>(
+                  <RepositoryItem repository={repository} key={repository .name}/>
                 )
               )
             }
-
-
             </ul>
         </section>
     )
